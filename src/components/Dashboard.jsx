@@ -6,7 +6,6 @@ import RoomTitle from "./RoomTitle";
 
 export default function Dashboard() {
   return (
-    <div>No</div>
     <Grid
       backgroundColor={"darkGrey"}
       minHeight="100vh"
