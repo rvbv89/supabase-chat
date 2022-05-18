@@ -18,11 +18,9 @@ export const AuthProvider = ({ children }) => {
   const navigate = useNavigate();
   const location = useLocation();
   const [user, setUser] = useState(null);
-  const [localUser, setLocalUser] = useState('')
+  const [localUser, setLocalUser] = useState("");
   const [loggedIn, setLoggedIn] = useState(false);
   const [userList, setUserList] = useState(null);
-
- 
 
   useEffect(() => {
     async function fetchUserList() {
@@ -43,8 +41,8 @@ export const AuthProvider = ({ children }) => {
     });
 
     setUser(user);
-    setLoggedIn(true)
-    localStorage.setItem('user', user);
+    setLoggedIn(true);
+    // localStorage.setItem("user", user);
     const origin = location.state?.from?.pathname || "/dashboard";
     navigate(origin);
     if (error) {
@@ -55,18 +53,15 @@ export const AuthProvider = ({ children }) => {
     }
   };
 
-  useEffect(()=>{
-    
-    if (loggedIn){
-      const currentUser = localStorage.getItem('user')
-      // const parsedLocalUser = JSON.parse(currentUser)
-      setLocalUser(currentUser)
-      console.log(localUser)
-      console.log(user)
-    }
-    
-  })
-
+  // useEffect(() => {
+  //   if (loggedIn) {
+  //     const currentUser = localStorage.getItem("user");
+  //     // const parsedLocalUser = JSON.parse(currentUser)
+  //     setLocalUser(currentUser);
+  //     console.log(localUser);
+  //     console.log(user);
+  //   }
+  // });
 
   const handleRegister = async (username, email, password) => {
     console.log(email);
