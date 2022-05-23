@@ -2,7 +2,6 @@ import React from "react";
 import MessageInput from "./MessageInput";
 import Messages from "./Messages";
 import { Box, Flex } from "@chakra-ui/react";
-import { Container } from "semantic-ui-react";
 
 export default function ChatDisplay() {
   return (
@@ -10,7 +9,7 @@ export default function ChatDisplay() {
       <Box
         centerContent
         overflowY="auto"
-        maxHeight={{base:"20em", lg:"30em"}}
+        maxHeight={{ base: "20em", lg: "30em" }}
         p={"10"}
         // sx={{
         //   "&::-webkit-scrollbar": {
@@ -25,7 +24,7 @@ export default function ChatDisplay() {
         //     borderRadius: "5px",
         //   },
         // }}
-        marginTop={{ base:"4", lg: "4" }}
+        marginTop={{ base: "4", lg: "4" }}
         borderRadius={"8px"}
         backgroundColor={"grey"}
       >
