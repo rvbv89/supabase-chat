@@ -51,7 +51,7 @@ export default function Welcome() {
               backgroundColor="grey"
               boxShadow="md"
             >
-              <Heading color="">Welcome To ChatApp</Heading>
+              <Heading color="">Welcome To ChatApp!</Heading>
               <FormControl>
                 <InputGroup>
                   <InputLeftElement
