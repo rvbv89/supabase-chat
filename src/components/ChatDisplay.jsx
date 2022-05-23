@@ -10,20 +10,9 @@ export default function ChatDisplay() {
         centerContent
         overflowY="auto"
         maxHeight={{ base: "20em", lg: "30em" }}
+        minHeight={{base:"15em"}}
         p={"10"}
-        // sx={{
-        //   "&::-webkit-scrollbar": {
-        //     padding: "4em",
-        //     margin: "4em",
-        //     width: "16px",
-        //     borderRadius: "5px",
-        //     backgroundColor: "whitesmoke",
-        //   },
-        //   "&::-webkit-scrollbar-thumb": {
-        //     backgroundColor: `#B1B0B1`,
-        //     borderRadius: "5px",
-        //   },
-        // }}
+     
         marginTop={{ base: "4", lg: "4" }}
         borderRadius={"8px"}
         backgroundColor={"grey"}
