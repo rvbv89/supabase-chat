@@ -7,15 +7,19 @@ export default function MessageItem({ text, messageUser, messageUsername }) {
 
   return (
     <>
+
+  
+   <Box justifySelf={'end'}>
       <Text>{messageUsername}</Text>
       <Box
-        placeItem={"right"}
-        maxW={"50%"}
-        p={"3"}
+        maxW={"fit-content"}
+        py={'3'}
+        px={"6"}
         backgroundColor={messageUser === user.id ? "green" : "blue"}
         borderRadius={"10px"}
       >
         <Text>{text}</Text>
+      </Box>
       </Box>
     </>
   );

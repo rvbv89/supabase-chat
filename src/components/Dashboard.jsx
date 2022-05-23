@@ -26,16 +26,13 @@ export default function Dashboard() {
         my={{ base: "2", md: "0", lg: "0" }}
         colSpan={3}
         rowSpan={{ lg: "2", md: "0", sm: "0" }}
-        maxHeight={{ lg: "2", md: "-1", sm: "-3" }}
+        // maxHeight={{ lg: "2", md: "-1", sm: "-3" }}
+        maxHeight="100%"
       >
         <ChatDisplay />
       </GridItem>
       <GridItem rowStart={{ base: "start", md: "start", lg: "auto" }}>
-        <RoomTitle
-          my={{ base: "2", md: "0", lg: "0" }}
-          p={{ base: "0", md: "0", lg: "0" }}
-          s
-        />
+        <RoomTitle />
       </GridItem>
     </Grid>
   );

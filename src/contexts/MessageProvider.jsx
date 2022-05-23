@@ -14,12 +14,10 @@ export function useMessage() {
 export default function MessageProvider({ children }) {
   const { user } = useAuth();
   const [messageData, setMessageData] = useState([]);
-  // const [messages, setMessages] = useState([]);
+  const [loading, setLoading] = useState(false);
   const [insertMessageToggle, setInsertMessageToggle] = useState(false);
-  const [serverMessages, setServerMessages] = useState([]);
   const [rooms, setRooms] = useState([]);
   const [currentRoom, setCurrentRoom] = useState(DEFAULT_ROOM);
-  
 
   async function fetchRooms() {
     const { data, error } = await supabase
@@ -27,18 +25,19 @@ export default function MessageProvider({ children }) {
       .select()
       .order("id", { ascending: true });
     setRooms(data);
-    
-   console.log(currentRoom);
+
+    console.log(currentRoom);
   }
 
   useEffect(() => {
     if (!user) return;
-    console.log(user)
+    console.log(user);
     fetchRooms();
-    console.log(rooms)
+    console.log(rooms);
   }, [user]);
 
   const fetchMessages = async () => {
+    setLoading(true);
     let { data: messages, error } = await supabase
       .from("messages")
       .select("*")
@@ -50,14 +49,19 @@ export default function MessageProvider({ children }) {
       console.log(error);
     }
     console.log("fetch");
-  }
+    setLoading(false);
+  };
 
   async function INSERT_MESSAGE(message) {
-    const { data, error } = await supabase
-      .from("messages")
-      .insert({ user: message.id, username:user.user_metadata.username, message: message.msg, room: currentRoom });
+    const { data, error } = await supabase.from("messages").insert({
+      user: message.id,
+      username: user.user_metadata.username,
+      message: message.msg,
+      room: currentRoom,
+    });
     console.log("INSERT_MESSAGE called");
     setInsertMessageToggle(!insertMessageToggle);
+    console.log(loading);
   }
 
   async function INSERT_ROOM(roomName) {
@@ -94,13 +98,9 @@ export default function MessageProvider({ children }) {
     };
   }, []);
 
-  // function handleMessage(message) {
-  //   console.log(message);
-
-  //   setMessages(message);
-  // }
-
   const value = {
+    loading,
+    setLoading,
     fetchMessages,
     messageData,
     setMessageData,
@@ -108,9 +108,6 @@ export default function MessageProvider({ children }) {
     DEFAULT_ROOM,
     INSERT_MESSAGE,
     INSERT_ROOM,
-    // handleMessage,
-    // messages,
-    serverMessages,
     rooms,
     setRooms,
     currentRoom,

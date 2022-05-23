@@ -16,6 +16,7 @@ import {
 import { AddIcon } from "@chakra-ui/icons";
 import { useMessage } from "../contexts/MessageProvider";
 import RoomItem from "./RoomItem";
+import RoomTitle from "./RoomTitle";
 
 export default function Sidebar({ theme }) {
   const { rooms, currentRoom, setCurrentRoom } = useMessage();
@@ -34,7 +35,7 @@ export default function Sidebar({ theme }) {
         marginBottom={{ base: "-0.5", md: "2", lg: "3" }}
         placement="right"
         ref={btnRef}
-        backgroundColor={"#b794f4"}
+        backgroundColor={"blue"}
         color={"whitesmoke"}
         onClick={onOpen}
       >
@@ -59,7 +60,6 @@ export default function Sidebar({ theme }) {
             <Divider my={"1em"} />
             <RadioGroup
               onClick={onClose}
-              colorScheme={"purple"}
               marginTop={".5em"}
               onChange={setCurrentRoom}
               value={currentRoom}
