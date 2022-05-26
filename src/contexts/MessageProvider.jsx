@@ -12,13 +12,17 @@ export function useMessage() {
 }
 
 export default function MessageProvider({ children }) {
+  // user state from auth context
   const { user } = useAuth();
+  //Message and room states, loading state
+  //TODO: investigate creating redux stores instead of contexts as states become more complex
   const [messageData, setMessageData] = useState([]);
   const [loading, setLoading] = useState(false);
   const [insertMessageToggle, setInsertMessageToggle] = useState(false);
   const [rooms, setRooms] = useState([]);
   const [currentRoom, setCurrentRoom] = useState(DEFAULT_ROOM);
 
+  //fetch rooms from db
   async function fetchRooms() {
     const { data, error } = await supabase
       .from("rooms")
@@ -29,13 +33,14 @@ export default function MessageProvider({ children }) {
     console.log(currentRoom);
   }
 
+  //On user state, fetch rooms from db
   useEffect(() => {
     if (!user) return;
     console.log(user);
     fetchRooms();
     console.log(rooms);
   }, [user]);
-
+  //initial message fetch
   const fetchMessages = async () => {
     setLoading(true);
     let { data: messages, error } = await supabase
@@ -48,10 +53,9 @@ export default function MessageProvider({ children }) {
     if (error) {
       console.log(error);
     }
-    console.log("fetch");
     setLoading(false);
   };
-
+  //insert messages to db
   async function INSERT_MESSAGE(message) {
     const { data, error } = await supabase.from("messages").insert({
       user: message.id,
@@ -64,40 +68,7 @@ export default function MessageProvider({ children }) {
     console.log(loading);
   }
 
-  async function INSERT_ROOM(roomName) {
-    const roomId = uuidv4();
-    const { data, error } = await supabase
-      .from("rooms")
-      .insert([
-        { room_name: roomName, room_id: roomId, created_by_user: user.id },
-      ]);
-  }
-
-  useEffect(() => {
-    const roomSubscription = supabase
-      .from("rooms")
-      .on("*", (payload) => {
-        if (payload.eventType !== "DELETE") {
-          const newRoom = payload.new;
-          setRooms((prevRooms) => {
-            const roomExists = prevRooms.find((r) => r.id === newRoom.id);
-            let newRooms;
-            if (roomExists) {
-              window.alert("A Room with this name already exists...");
-              //remove room
-            } else {
-              newRooms = [...prevRooms, newRoom];
-            }
-            return newRooms;
-          });
-        }
-      })
-      .subscribe();
-    return () => {
-      supabase.removeSubscription(roomSubscription);
-    };
-  }, []);
-
+  //encap context values in object
   const value = {
     loading,
     setLoading,
@@ -107,7 +78,6 @@ export default function MessageProvider({ children }) {
     fetchRooms,
     DEFAULT_ROOM,
     INSERT_MESSAGE,
-    INSERT_ROOM,
     rooms,
     setRooms,
     currentRoom,
