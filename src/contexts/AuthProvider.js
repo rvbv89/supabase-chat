@@ -62,7 +62,8 @@ export const AuthProvider = ({ children }) => {
   //     console.log(user);
   //   }
   // });
-
+  
+//Register user
   const handleRegister = async (username, email, password) => {
     console.log(email);
 
@@ -86,6 +87,11 @@ export const AuthProvider = ({ children }) => {
         window.alert(error.message);
       }
     }
+  };
+  //Reset Password
+    const handleReset = async (email) => {
+    let { data, error } = await supabase.auth.api.resetPasswordForEmail(email);
+    alert("A reset link has been sent to the email provided");
   };
 
   const value = {
