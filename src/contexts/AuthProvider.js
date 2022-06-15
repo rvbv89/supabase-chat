@@ -65,7 +65,7 @@ export const AuthProvider = ({ children }) => {
   //   }
   // });
 
-  //Register new user
+  //Register user
   const handleRegister = async (username, email, password) => {
     if (!username || !email || !password) {
       alert("Please complete all fields");
@@ -100,7 +100,7 @@ export const AuthProvider = ({ children }) => {
     userList,
     onLogin: handleLogin,
     onRegister: handleRegister,
-    onReset: handleReset
+    onReset: handleReset,
   };
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
 };
