@@ -88,6 +88,7 @@ export const AuthProvider = ({ children }) => {
       }
     }
   };
+  
   //Reset Password
     const handleReset = async (email) => {
     let { data, error } = await supabase.auth.api.resetPasswordForEmail(email);
