@@ -18,11 +18,12 @@ export const AuthProvider = ({ children }) => {
   const navigate = useNavigate();
   const location = useLocation();
   const [user, setUser] = useState(null);
-  const [localUser, setLocalUser] = useState("");
+  // const [localUser, setLocalUser] = useState("");
   const [loggedIn, setLoggedIn] = useState(false);
   const [userList, setUserList] = useState(null);
 
   useEffect(() => {
+    //fetch users for contact list  **future feature
     async function fetchUserList() {
       let { data: users, error } = await supabase.from("users").select("*");
       setUserList(users);
@@ -33,7 +34,7 @@ export const AuthProvider = ({ children }) => {
     return;
   }, [loggedIn]);
 
-  //login submit callback
+  //Login user
   const handleLogin = async (email, password) => {
     const { user, error } = await supabase.auth.signIn({
       email,
@@ -53,6 +54,7 @@ export const AuthProvider = ({ children }) => {
     }
   };
 
+  //TODO local storage for user
   // useEffect(() => {
   //   if (loggedIn) {
   //     const currentUser = localStorage.getItem("user");
@@ -63,9 +65,8 @@ export const AuthProvider = ({ children }) => {
   //   }
   // });
 
+  //Register new user
   const handleRegister = async (username, email, password) => {
-    console.log(email);
-
     if (!username || !email || !password) {
       alert("Please complete all fields");
     } else {
@@ -88,11 +89,18 @@ export const AuthProvider = ({ children }) => {
     }
   };
 
+  //Reset Password
+  const handleReset = async (email) => {
+    let { data, error } = await supabase.auth.api.resetPasswordForEmail(email);
+    alert("A reset link has been sent to the email provided");
+  };
+
   const value = {
     user,
     userList,
     onLogin: handleLogin,
     onRegister: handleRegister,
+    onReset: handleReset
   };
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
 };
