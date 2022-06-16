@@ -1,5 +1,4 @@
-import React, { useContext, useEffect, useState, useRef } from "react";
-import { v4 as uuidv4 } from "uuid";
+import React, { useContext, useEffect, useState } from "react";
 import { useAuth } from "./AuthProvider";
 import { supabase } from "../supabase/init";
 
@@ -14,6 +13,7 @@ export function useMessage() {
 export default function MessageProvider({ children }) {
   // user state from auth context
   const { user } = useAuth();
+
   //Message and room states, loading state
   //TODO: investigate creating redux stores instead of contexts as states become more complex
   const [messageData, setMessageData] = useState([]);
@@ -40,6 +40,7 @@ export default function MessageProvider({ children }) {
     fetchRooms();
     console.log(rooms);
   }, [user]);
+
   //initial message fetch
   const fetchMessages = async () => {
     setLoading(true);
@@ -55,6 +56,7 @@ export default function MessageProvider({ children }) {
     }
     setLoading(false);
   };
+
   //insert messages to db
   async function INSERT_MESSAGE(message) {
     const { data, error } = await supabase.from("messages").insert({
