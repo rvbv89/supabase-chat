@@ -21,8 +21,6 @@ export default function RoomTitle() {
         <Heading
           marginBottom={{ base: "3", md: "5", lg: "5" }}
           p={{ base: "3", md: "5", lg: "5" }}
-          marginBottom={{ base: "2", md: "0", lg: "0" }}
-          p={{ base: "3", md: "0", lg: "0" }}
           position={"absolute"}
           color={"#E2DFE4"}
           key={DEFAULT_ROOM}
