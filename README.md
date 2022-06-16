@@ -1,3 +1,6 @@
+# Want to check out the current live version of this project?
+Follow this link: https://rvbv89-supachat.netlify.app/
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
