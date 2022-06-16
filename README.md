@@ -2,6 +2,9 @@
 Follow this link: https://rvbv89-supachat.netlify.app/
 
 # About this app
+Front End: React, Chakra UI
+Back End: Supabase
+
 This app was my first attempt at doing something other than a simple Express/Node server for the back end. I used Supabase on another small project, and I absolutely love everything about it. The dashboard, built in database queries, auth patterns etc. are all so simple to plug and play.  This project was previously built with Socket.io, but I really wanted to try out Supabase's real-time subscription features. So far so good!  I am currently building out a fuller-featured social media app that will incorporate this project.  It will feature a feed of user posts, an ability to connect with other users socially, and it will have different "boards" or "rooms" to post in. I'm still ironing some things out with the authorization flow in this app, and the next set of features will be registration/login support for Google, SMS etc. 
 
 # Getting Started with Create React App
