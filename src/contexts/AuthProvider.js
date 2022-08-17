@@ -36,6 +36,7 @@ export const AuthProvider = ({ children }) => {
 
   //Login user
   const handleLogin = async (email, password) => {
+    
     const { user, error } = await supabase.auth.signIn({
       email,
       password,
